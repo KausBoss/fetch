@@ -8,21 +8,17 @@ To run this application using Docker, follow these steps:
 
 1. **Clone the Repository**:
 
-<code class="copyable">
-git clone https://github.com/fetch-rewards/receipt-processor-challenge.git
-</code>
+```git clone https://github.com/fetch-rewards/receipt-processor-challenge.git```
+
 
 2. **Build the Docker Image**:
 
-<code class="copyable">
-docker build -t receipt-processor .
-</code>
+```docker build -t receipt-processor .```
+
 
 3. **Run the Docker Container**:
 
-<code class="copyable">
-docker run -p 8080:8080 receipt-processor
-</code>
+```docker run -p 8080:8080 receipt-processor```
 
 
 4. **Access the Endpoints**:
