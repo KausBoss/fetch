@@ -18,5 +18,5 @@ type Receipt struct {
 }
 
 func (r Receipt) SetPoints() {
-
+	r.Points = calculatePoints(&r)
 }
