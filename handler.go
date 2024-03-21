@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"github.com/google/uuid"
+	"github.com/gorilla/mux"
 	"net/http"
 )
 
@@ -35,6 +36,31 @@ func ProcessReceipt(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetPoints(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	receiptID := params["id"]
+
+	parsedUUID, err := uuid.Parse(receiptID)
+	if err != nil {
+		http.Error(w, "Error in ID Parsing", http.StatusBadRequest)
+		return
+	}
+
+	receipt, ok := receipts[parsedUUID]
+	if !ok {
+		http.Error(w, "Receipt not found", http.StatusNotFound)
+		return
+	}
+
+	response, err := json.Marshal(map[string]interface{}{"points": receipt.Points})
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
+	_, err = w.Write(response)
+	if err != nil {
+		return
+	}
 }
