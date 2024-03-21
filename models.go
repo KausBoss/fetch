@@ -1,6 +1,8 @@
 package main
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+)
 
 type Item struct {
 	ShortDescription string `json:"shortDescription"`
@@ -13,10 +15,6 @@ type Receipt struct {
 	PurchaseTime string    `json:"purchaseTime"`
 	Items        []Item    `json:"items"`
 	Total        string    `json:"total"`
-	Points       int       `json:"points,omitempty"`
+	Points       int       `json:"points"`
 	ID           uuid.UUID `json:"id,omitempty"`
-}
-
-func (r Receipt) SetPoints() {
-	r.Points = calculatePoints(&r)
 }

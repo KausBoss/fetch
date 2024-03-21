@@ -17,7 +17,7 @@ func ProcessReceipt(w http.ResponseWriter, r *http.Request) {
 	}
 
 	receipt.ID = uuid.New()
-	receipt.SetPoints()
+	receipt.Points = calculatePoints(&receipt)
 
 	// save to main database(here a global variable)
 	receipts[receipt.ID] = receipt
