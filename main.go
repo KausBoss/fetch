@@ -4,8 +4,15 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 )
+
+var receipts map[uuid.UUID]Receipt
+
+func init() {
+	receipts = make(map[uuid.UUID]Receipt)
+}
 
 func main() {
 	router := mux.NewRouter()

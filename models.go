@@ -16,3 +16,7 @@ type Receipt struct {
 	Points       int       `json:"points,omitempty"`
 	ID           uuid.UUID `json:"id,omitempty"`
 }
+
+func (r Receipt) SetPoints() {
+
+}
