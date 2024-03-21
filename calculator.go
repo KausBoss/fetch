@@ -1,6 +1,7 @@
 package main
 
 import (
+	"math"
 	"strconv"
 	"strings"
 	"time"
@@ -37,7 +38,7 @@ func calculatePoints(receipt *Receipt) (points int) {
 // retailNamePoints One point for every alphanumeric character in the retailer name.
 func retailNamePoints(retailName string) (points int) {
 	points = 0
-	for ch := range retailName {
+	for _, ch := range retailName {
 		if unicode.IsLetter(rune(ch)) || unicode.IsDigit(rune(ch)) {
 			points++
 		}
@@ -66,8 +67,9 @@ func totalDivisiblePoints(total string) (points int) {
 }
 
 // itemCountPoints 5 points for every two items on the receipt.
-func itemCountPoints(items []Item) int {
-	return (len(items) / 2) * 5
+func itemCountPoints(items []Item) (points int) {
+	points = (len(items) / 2) * 5
+	return
 }
 
 // itemDescriptionPoints If the trimmed length of the item description is a multiple of 3, multiply the price by 0.2 and round up to the nearest integer.
@@ -79,7 +81,7 @@ func itemDescriptionPoints(items []Item) int {
 			priceFloat, err := strconv.ParseFloat(item.Price, 64)
 			if err == nil {
 				// rounding up to nearest integer
-				points += int((priceFloat * 0.2) + 0.5)
+				points += int(math.Ceil(priceFloat * 0.2))
 			}
 		}
 	}

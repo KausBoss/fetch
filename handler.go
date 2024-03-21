@@ -2,9 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
-	"net/http"
 )
 
 func ProcessReceipt(w http.ResponseWriter, r *http.Request) {
