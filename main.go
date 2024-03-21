@@ -1,5 +1,17 @@
 package main
 
+import (
+	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
+
 func main() {
-	println("Init project")
+	router := mux.NewRouter()
+
+	router.HandleFunc("/receipts/process", ProcessReceipt).Methods("POST")
+	router.HandleFunc("/receipts/{id}/points", GetPoints).Methods("GET")
+
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
